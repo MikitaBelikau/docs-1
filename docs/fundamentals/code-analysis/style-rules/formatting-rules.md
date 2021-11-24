@@ -1,46 +1,4 @@
 ---
-title: Code style formatting rules
-description: Learn about the code style rules for formatting indentations, spaces, and new lines.
-ms.date: 09/25/2020
-ms.topic: reference
-author: gewarren
-ms.author: gewarren
-dev_langs:
-- CSharp
-- VB
-f1_keywords:
-- IDE0055
-- formatting rules
-helpviewer_keywords:
-- IDE0055
-- formatting code style rules [EditorConfig]
-- formatting rules
-- EditorConfig formatting conventions
----
-# Formatting rules
-
-Formatting rules affect how indentation, spaces, and new lines are aligned around .NET programming language constructs. The rules fall into the following categories:
-
-- [.NET formatting rules](#net-formatting-rules): Rules that apply to both C# and Visual Basic. The EditorConfig option names for these rules start with `dotnet_` prefix.
-- [C# formatting rules](#c-formatting-rules): Rules that are specific to C# language only. The EditorConfig option names for these rules start with `csharp_` prefix.
-
-## Rule ID: "IDE0055" (Fix formatting)
-
-All formatting options have rule ID `IDE0055` and title `Fix formatting`. Set the severity of a formatting violation in an EditorConfig file using the following configuration line.
-
-```ini
-dotnet_diagnostic.IDE0055.severity = <severity value>
-```
-
-The severity value must be `warning` or `error` to be [enforced on build](../overview.md#code-style-analysis). For all possible severity values, see [severity level](../configuration-options.md#severity-level).
-
-## Option format
-
-Options for formatting rules can be specified in an EditorConfig file with the following format:
-
-`rule_name = value`
-
-For many rules, you specify either `true` (prefer this style) or `false` (do not prefer this style) for `value`. For other rules, you specify a value such as `flush_left` or `before_and_after` to describe when and where to apply the rule. You don't specify a severity.
 
 ## .NET formatting rules
 
@@ -48,9 +6,6 @@ The formatting rules in this section apply to both C# and Visual Basic.
 
 - [Organize usings](#organize-using-directives)
   - dotnet_sort_system_directives_first
-  - dotnet_separate_import_directive_groups
-- [Namespace options](#dotnet-namespace-options)
-  - dotnet_style_namespace_match_folder
 
 ### Organize using directives
 
@@ -62,7 +17,6 @@ Example *.editorconfig* file:
 # .NET formatting rules
 [*.{cs,vb}]
 dotnet_sort_system_directives_first = true
-dotnet_separate_import_directive_groups = true
 ```
 
 #### dotnet\_sort\_system\_directives_first
@@ -86,77 +40,6 @@ using Octokit;
 using System.Collections.Generic;
 using Octokit;
 using System.Threading.Tasks;
-```
-
-#### dotnet\_separate\_import\_directive\_groups
-
-|Property|Value|
-|-|-|
-| **Option name** | dotnet_separate_import_directive_groups |
-| **Applicable languages** | C# and Visual Basic |
-| **Introduced version** | Visual Studio 2017 version 15.5 |
-| **Option values** | `true` - Place a blank line between `using` directive groups.<br /><br />`false` - Do not place a blank line between `using` directive groups. |
-
-Code examples:
-
-```csharp
-// dotnet_separate_import_directive_groups = true
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-using Octokit;
-
-// dotnet_separate_import_directive_groups = false
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Octokit;
-```
-
-### Dotnet namespace options
-
-These formatting rules concern the declaration of namespaces in both C# and Visual Basic.
-
-Example *.editorconfig* file:
-
-```ini
-# .NET namespace rules
-[*.{cs,vb}]
-dotnet_style_namespace_match_folder = true
-```
-
-#### dotnet\_style\_namespace\_match\_folder
-
-|Property|Value|
-|-|-|
-| **Option name** | dotnet_style_namespace_match_folder |
-| **Applicable languages** | C# and Visual Basic |
-| **Introduced version** | Visual Studio 2019 version 16.10 |
-| **Option values** | `true` - Match namespaces to folder structure<br /><br />`false` - Do not report on namespaces that do not match folder structure |
-
-Code examples:
-
-```csharp
-// dotnet_style_namespace_match_folder = true
-// file path: Example/Convention/C.cs
-using System;
-
-namespace Example.Convention
-{
-    class C
-    {
-    }
-}
-
-// dotnet_style_namespace_match_folder = false
-// file path: Example/Convention/C.cs
-using System;
-
-namespace Example
-{
-    class C
-    {
-    }
-}
 ```
 
 ## C# formatting rules
